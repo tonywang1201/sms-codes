@@ -15,23 +15,14 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          color: "white",
+          fontSize: 18,
+          fontWeight: 700,
+          fontFamily: "sans-serif",
+          letterSpacing: -1,
         }}
       >
-        <svg width="22" height="19" viewBox="0 0 22 19" fill="none">
-          {/* Chat bubble */}
-          <path
-            d="M2 0C0.9 0 0 0.9 0 2v10c0 1.1 0.9 2 2 2h3v4l5-4h10c1.1 0 2-0.9 2-2V2c0-1.1-0.9-2-2-2H2z"
-            fill="white"
-          />
-          {/* Checkmark */}
-          <path
-            d="M6 8l3.5 3.5L16 5"
-            stroke="#4F46E5"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        SMS
       </div>
     ),
     { width: 32, height: 32 }
