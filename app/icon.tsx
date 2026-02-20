@@ -10,19 +10,47 @@ export default function Icon() {
         style={{
           width: 32,
           height: 32,
-          background: "#4F46E5",
-          borderRadius: 7,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "white",
-          fontSize: 18,
-          fontWeight: 700,
-          fontFamily: "sans-serif",
-          letterSpacing: -1,
+          background: "linear-gradient(135deg, #6366F1, #8B5CF6)",
+          borderRadius: 7,
         }}
       >
-        SMS
+        <div style={{ position: "relative", width: 22, height: 19, display: "flex" }}>
+          {/* Bubble tail */}
+          <div
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: 3,
+              width: 6,
+              height: 6,
+              background: "white",
+              transform: "rotate(45deg)",
+            }}
+          />
+          {/* Bubble body */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              width: 22,
+              height: 14,
+              background: "white",
+              borderRadius: 3,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 2,
+            }}
+          >
+            <div style={{ width: 3, height: 3, borderRadius: 2, background: "#6366F1" }} />
+            <div style={{ width: 3, height: 3, borderRadius: 2, background: "#6366F1" }} />
+            <div style={{ width: 3, height: 3, borderRadius: 2, background: "#6366F1" }} />
+            <div style={{ width: 3, height: 3, borderRadius: 2, background: "#6366F1" }} />
+          </div>
+        </div>
       </div>
     ),
     { width: 32, height: 32 }
