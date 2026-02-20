@@ -15,3 +15,7 @@ export async function getMessages(limit: number = 20): Promise<SmsMessage[]> {
     typeof item === "string" ? JSON.parse(item) : (item as unknown as SmsMessage)
   );
 }
+
+export async function clearMessages(): Promise<void> {
+  await kv.del(KEY);
+}

@@ -7,6 +7,7 @@ import MessageCard from "./MessageCard";
 export default function MessageList({ token }: { token: string }) {
   const [messages, setMessages] = useState<SmsMessage[]>([]);
   const [loading, setLoading] = useState(true);
+  const [clearing, setClearing] = useState(false);
 
   useEffect(() => {
     let timer: ReturnType<typeof setInterval>;
@@ -53,6 +54,17 @@ export default function MessageList({ token }: { token: string }) {
     };
   }, [token]);
 
+  const handleClear = async () => {
+    if (!confirm("确定清空所有记录吗？")) return;
+    setClearing(true);
+    try {
+      await fetch(`/api/sms?token=${encodeURIComponent(token)}`, { method: "DELETE" });
+      setMessages([]);
+    } finally {
+      setClearing(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="text-center text-gray-400 dark:text-gray-500 py-12">
@@ -71,10 +83,19 @@ export default function MessageList({ token }: { token: string }) {
   }
 
   return (
-    <div className="space-y-3">
-      {messages.map((msg) => (
-        <MessageCard key={msg.id} message={msg} />
-      ))}
-    </div>
+    <>
+      <div className="space-y-3">
+        {messages.map((msg) => (
+          <MessageCard key={msg.id} message={msg} />
+        ))}
+      </div>
+      <button
+        onClick={handleClear}
+        disabled={clearing}
+        className="fixed bottom-6 right-6 bg-red-500 hover:bg-red-600 disabled:opacity-50 text-white text-sm px-4 py-2 rounded-full shadow-lg transition-colors"
+      >
+        {clearing ? "清空中..." : "清空记录"}
+      </button>
+    </>
   );
 }

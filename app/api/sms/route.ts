@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { pushMessage, getMessages } from "@/lib/kv";
+import { pushMessage, getMessages, clearMessages } from "@/lib/kv";
 import { extractCode } from "@/lib/extract-code";
 import { SmsMessage } from "@/lib/types";
 
@@ -43,4 +43,16 @@ export async function GET(request: NextRequest) {
   const messages = await getMessages(limit);
 
   return NextResponse.json({ messages });
+}
+
+export async function DELETE(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const token = searchParams.get("token");
+
+  if (!token || token !== process.env.VIEW_TOKEN) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  await clearMessages();
+  return NextResponse.json({ ok: true });
 }
